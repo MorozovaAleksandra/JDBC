@@ -1,35 +1,31 @@
-import java.sql.*;
+import models.Student;
+import repositories.StudentsRepository;
+import repositories.StudentsRepositoryJdbcImpl;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Main {
     private static final String URL = "jdbc:postgresql://localhost:5432/java_lab_intro";
     private static final String USER = "postgres";
     private static final String PASSWORD = "qwerty007";
 
+
     public static void main(String[] args) throws SQLException {
-        SimpleDataSource dataSource = new SimpleDataSource();
-        Connection connection = dataSource.openConnection(URL, USER, PASSWORD);
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from student");
-
-        while (resultSet.next()) {
-            System.out.println("ID " + resultSet.getInt("id"));
-            System.out.println("First Name " + resultSet.getString("first_name"));
-            System.out.println("Last Name " + resultSet.getString("last_name"));
-            System.out.println("Age " + resultSet.getInt("age"));
-            System.out.println("Group Number " + resultSet.getInt("group_number"));
-        }
-        System.out.println("-------------------");
-
-        resultSet.close();
-
-        resultSet = statement.executeQuery("select s.id as s_id, *\n" +
-                "from student s\n" +
-                "         full outer join mentor m on s.id = m." +
-                "student_id;");
-
-        while (resultSet.next()) {
-            System.out.println("ID " + resultSet.getInt("s_id"));
-        }
+        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        StudentsRepository studentsRepository = new StudentsRepositoryJdbcImpl(connection);
+        System.out.println(studentsRepository.findById(2L));
+        //findAll
+        System.out.println(studentsRepository.findAll());
+        //save
+        Student newStudent = new Student(null, "Роман", "Леонтьев", 18, 905);
+        studentsRepository.save(newStudent);
+        //update
+        Student student = studentsRepository.findById(2L);
+        student.setFirstName("Григорий");
+        studentsRepository.update(student);
         connection.close();
     }
+
 }
