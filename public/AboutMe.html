@@ -8,7 +8,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- загружаем Бутстрап -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style type="text/css">
@@ -27,16 +30,54 @@
             font-size: 18px;
         }
 
-        button{
+        button {
             background-color: cornflowerblue;
             color: aliceblue;
 
-            }
+        }
+
     </style>
-    <!-- закрываем служебную часть страницы -->
 </head>
 <body>
-<!-- тут будет наша страница -->
+<div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel">Заявка</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" name="myForm" action="Requests.html">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label text"
+                               style="font-size: 20px; color:#4c7171 ">Имя:</label>
+                        <input type="text" class="form-control text"
+                               style="font-size: 15px" id="name" name="name"
+                               placeholder="Введите имя" required>
+                        <label for="email" class="col-form-label text"
+                               style="font-size: 20px; color:#4c7171 ">Почта для обратной связи:</label>
+                        <input type="text" class="form-control text"
+                               style="font-size: 15px" id="email" name="email"
+                               placeholder="example@mail.com" required>
+                        <label for="message" class="col-form-label text"
+                               style="font-size: 20px; color: #4c7171">Сообщение:</label>
+                        <textarea class="form-control text" style="font-size: 15px"
+                                  placeholder="Введите сообщение"
+                                  id="message" name="message"></textarea>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="submit" value="push" id="sendValue" class="btn btn-primary">Отправить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -62,18 +103,26 @@
             </div>
         </div>
 
-        <div class="container" >
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <p>Телефон: +7 (904) 671-23-46</p>
                     <p>Почта: <a href="mailto: sashamorozova01@mail.com">sashamorozova01@mail.com</a></p>
                     <p>Телеграм: @aleksmorozovaa</p>
-                    <p>Также для сявзи со мной можно оставить заявку на сайте</p>
-                    <button href = "Request.html">Оставить заявку</button>
+                    <p>Также для сявзи со мной можно отправить заявку на сайте</p>
+                    <div class="bd-example">
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#exampleModalLive">
+                            Отправить заявку
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+
 </body>
-<!-- конец всей страницы -->
+
 </html>
